@@ -112,3 +112,53 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+
+const newObj = [{
+  title: 'Lambda',
+  date: 'July 22nd, 2019',
+  firstParagraph: `Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda  `,
+
+  secondParagraph: `Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda  `,
+
+  thirdParagraph: `Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda Lambda `
+}];
+
+const merged = [...data, ...newObj ];
+
+const articles = document.querySelector('.articles');
+
+function articleCreator(title, date, firstParagraph, secondParagraph, thirdParagraph) {
+  const article = document.createElement('div');
+  const articleTitle = document.createElement('h2');
+  const articleDate = document.createElement('p');
+  const content1 = document.createElement('p');
+  const content2 = document.createElement('p');
+  const content3 = document.createElement('p');
+  const mySpan = document.createElement('span');
+  article.appendChild(articleTitle);
+  article.appendChild(articleDate);
+  article.appendChild(content1);
+  article.appendChild(content2);
+  article.appendChild(content3);
+  article.appendChild(mySpan);
+  article.classList.add('article');
+  articleTitle.textContent = title;
+  articleDate.classList.add('date');
+  articleDate.textContent = date;
+  content1.textContent = firstParagraph;
+  content2.textContent = secondParagraph;
+  content3.textContent = thirdParagraph;
+  mySpan.classList.add('expandButton');
+  mySpan.textContent = "More"
+  mySpan.addEventListener('click', () => {
+    article.classList.toggle('article-open')
+    mySpan.textContent = "Less"
+  })
+  return article;
+}
+
+merged.map((data) => {
+  const newArticle = articleCreator(data.title, data.date, data.firstParagraph, data.secondParagraph, data.thirdParagraph);
+
+  articles.appendChild(newArticle);
+});
