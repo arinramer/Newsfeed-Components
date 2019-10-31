@@ -135,12 +135,14 @@ function articleCreator(title, date, firstParagraph, secondParagraph, thirdParag
   const content2 = document.createElement('p');
   const content3 = document.createElement('p');
   const mySpan = document.createElement('span');
+  const read = document.createElement('button');
   article.appendChild(articleTitle);
   article.appendChild(articleDate);
   article.appendChild(content1);
   article.appendChild(content2);
   article.appendChild(content3);
   article.appendChild(mySpan);
+  article.appendChild(read);
   article.classList.add('article');
   articleTitle.textContent = title;
   articleDate.classList.add('date');
@@ -148,11 +150,20 @@ function articleCreator(title, date, firstParagraph, secondParagraph, thirdParag
   content1.textContent = firstParagraph;
   content2.textContent = secondParagraph;
   content3.textContent = thirdParagraph;
+  read.textContent = "Click to close";
+  read.addEventListener("click", () => {
+    article.style.display = "none";
+  })
   mySpan.classList.add('expandButton');
-  mySpan.textContent = "More"
+  mySpan.textContent = "Click to expand";
   mySpan.addEventListener('click', () => {
     article.classList.toggle('article-open')
-    mySpan.textContent = "Less"
+    if (article.classList.contains('article-open')) {
+      mySpan.textContent = "Click to close"
+    } else {
+      mySpan.textContent = "Click to expand"
+    }
+    
   })
   return article;
 }
